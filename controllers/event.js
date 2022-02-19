@@ -1,13 +1,14 @@
 const {StatusCodes} = require('http-status-codes');
-const {BadResquestError} = require('../errors');
+const {BadRequestError, NotFoundError} = require('../errors');
 const Event = require('../models/Event.js');
+const Partecipant = require('../models/Partecipant');
 
 async function createEvent(req, res) {
   const {
     body: {days, name},
   } = req;
   if (!days || !name) {
-    throw new BadResquestError('Please provide both name and dates');
+    throw new BadRequestError('Please provide both name and dates');
   }
   const dates = days.split(',');
   const event = await Event.create({
@@ -18,7 +19,23 @@ async function createEvent(req, res) {
 }
 
 async function getEvent(req, res) {
-  res.send('get event');
+  const {
+    params: {id: eventId},
+  } = req;
+  const event = await Event.findById(eventId);
+  if (!event) {
+    throw new NotFoundError(`No event with ID ${eventId}`);
+  }
+  const partecipants = await Partecipant.find({eventId});
+  const response = {
+    name: event.name,
+    days: event.days,
+    partecipants: {},
+  };
+  partecipants.forEach((person) => {
+    response.partecipants[person.name] = person.available;
+  });
+  res.status(StatusCodes.OK).json(response);
 }
 
 module.exports = {
