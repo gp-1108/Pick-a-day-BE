@@ -32,4 +32,9 @@ partecipantSchema.pre('save', async function() {
   this.ip = await bcrypt.hash(this.ip, salt);
 });
 
+partecipantSchema.methods.compareIP = async function(candidateIP) {
+  const match = await bcrypt.compare(candidateIP, this.ip);
+  return match;
+};
+
 module.exports = mongoose.model('Partecipant', partecipantSchema);
