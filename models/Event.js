@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const arrayValidator = require('./dateArrayValidator.js');
 
 const eventSchema = new mongoose.Schema({
   name: {
@@ -8,14 +9,10 @@ const eventSchema = new mongoose.Schema({
     minlength: 3,
   },
   days: {
-    type: [Date],
+    type: [String],
     required: [true, 'Please provide dates allowed'],
-    validate: [validateLength, 'Cannot submit more than 14 days total'],
+    validate: arrayValidator,
   },
 });
-
-function validateLength(array) {
-  return array.length <= 14;
-}
 
 module.exports = mongoose.model('Event', eventSchema);
