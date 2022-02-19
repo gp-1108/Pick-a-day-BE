@@ -15,7 +15,7 @@ const partecipantSchema = new mongoose.Schema({
     type: [Date],
     required: true,
   },
-  event: {
+  eventId: {
     type: mongoose.Types.ObjectId,
     required: true,
   },
