@@ -3,6 +3,8 @@ require('express-async-errors');
 
 // files import
 const connectDB = require('./db/connectDB.js');
+const eventRouter = require('./routes/event-route.js');
+const partecipantRouter = require('./routes/partecipant-route.js');
 
 // extra security packages
 const helmet = require('helmet');
@@ -10,7 +12,9 @@ const cors = require('cors');
 const xss = require('xss-clean');
 const rateLimiter = require('express-rate-limit');
 
+// error imports
 const errorHandler = require('./middleware/errorHandler.js');
+const notFound = require('./middleware/not-found.js');
 
 const express = require('express');
 const app = express();
@@ -29,8 +33,13 @@ app.use(helmet());
 app.use(cors());
 app.use(xss());
 
+// Routes
+app.use('/api/v1/event', eventRouter);
+app.use('/api/v1/partecipants', partecipantRouter);
+
 // Error Handler
 app.use(errorHandler);
+app.use(notFound);
 
 const port = process.env.PORT || 5000;
 
