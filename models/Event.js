@@ -4,6 +4,7 @@ const arrayValidator = require('./dateArrayValidator.js');
 const eventSchema = new mongoose.Schema({
   name: {
     type: String,
+    trim: true,
     required: true,
     maxlength: 25,
     minlength: 3,

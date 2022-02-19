@@ -5,12 +5,14 @@ const arrayValidator = require('./dateArrayValidator.js');
 const partecipantSchema = new mongoose.Schema({
   name: {
     type: String,
+    trim: true,
     maxlength: 15,
     minlength: 3,
     required: [true, 'Please provide name'],
   },
   ip: {
     type: String,
+    trim: true,
     required: [true, 'Please provide IP address'],
   },
   available: {
