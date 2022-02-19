@@ -1,6 +1,9 @@
 require('dotenv').config();
 require('express-async-errors');
 
+// files import
+const connectDB = require('./db/connectDB.js');
+
 // extra security packages
 const helmet = require('helmet');
 const cors = require('cors');
@@ -22,4 +25,17 @@ app.use(helmet());
 app.use(cors());
 app.use(xss());
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5000;
+
+async function start() {
+  try {
+    await connectDB(process.env.MONGO_URI);
+    app.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+start();
