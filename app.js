@@ -10,6 +10,8 @@ const cors = require('cors');
 const xss = require('xss-clean');
 const rateLimiter = require('express-rate-limit');
 
+const errorHandler = require('./middleware/errorHandler.js');
+
 const express = require('express');
 const app = express();
 
@@ -20,10 +22,15 @@ app.use(
     max: 100, // limit each IP to 100 requests per windowMs
   }),
 );
+
+// Middleware
 app.use(express.json());
 app.use(helmet());
 app.use(cors());
 app.use(xss());
+
+// Error Handler
+app.use(errorHandler);
 
 const port = process.env.PORT || 5000;
 
