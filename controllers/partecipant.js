@@ -28,7 +28,8 @@ async function addPartecipant(req, res) {
   userDates.forEach((element) => {
     if (!re.test(element)) {
       throw new BadRequestError(
-        'Dates submitted do not match dd/mm/aaaa format');
+        // eslint-disable-next-line max-len
+        'The date input must be a sequence of dates express in format dd/mm/aaaa separated by commas');
     } else if (!event.days.includes(element)) {
       throw new ConflictError(
         `Cannot submit dates not present in main event (${element})`);
@@ -64,7 +65,8 @@ async function modifyPartecipant(req, res) {
   userDates.forEach((element) => {
     if (!re.test(element)) {
       throw new BadRequestError(
-        'Dates submitted do not match dd/mm/aaaa format');
+        // eslint-disable-next-line max-len
+        'The date input must be a sequence of dates express in format dd/mm/aaaa separated by commas');
     } else if (!event.days.includes(element)) {
       throw new ConflictError(
         `Cannot submit dates not present in main event (${element})`);
