@@ -6,6 +6,7 @@ const {
 } = require('../errors');
 const Event = require('../models/Event.js');
 const Partecipant = require('../models/Partecipant.js');
+const datesValidator = require('./datesValidation.js');
 
 async function addPartecipant(req, res) {
   const {
@@ -22,19 +23,7 @@ async function addPartecipant(req, res) {
     throw new BadRequestError(`No event with id ${eventId}`);
   }
 
-  // Validation of dates submitted
-  const re = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
-  const userDates = available.split(',');
-  userDates.forEach((element) => {
-    if (!re.test(element)) {
-      throw new BadRequestError(
-        // eslint-disable-next-line max-len
-        'The date input must be a sequence of dates express in format dd/mm/aaaa separated by commas');
-    } else if (!event.days.includes(element)) {
-      throw new ConflictError(
-        `Cannot submit dates not present in main event (${element})`);
-    }
-  });
+  const userDates = datesValidator(available);
 
   await Partecipant.create({
     ip,
@@ -60,18 +49,7 @@ async function modifyPartecipant(req, res) {
   }
 
   // Validation of dates submitted
-  const re = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
-  const userDates = available.split(',');
-  userDates.forEach((element) => {
-    if (!re.test(element)) {
-      throw new BadRequestError(
-        // eslint-disable-next-line max-len
-        'The date input must be a sequence of dates express in format dd/mm/aaaa separated by commas');
-    } else if (!event.days.includes(element)) {
-      throw new ConflictError(
-        `Cannot submit dates not present in main event (${element})`);
-    }
-  });
+  const userDates = datesValidator(available);
 
   // Checking existing data
   const partecipant = await Partecipant.findOne({eventId, name});

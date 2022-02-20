@@ -2,6 +2,7 @@ const {StatusCodes} = require('http-status-codes');
 const {BadRequestError, NotFoundError} = require('../errors');
 const Event = require('../models/Event.js');
 const Partecipant = require('../models/Partecipant');
+const datesValidator = require('./datesValidation.js');
 
 async function createEvent(req, res) {
   const {
@@ -10,15 +11,7 @@ async function createEvent(req, res) {
   if (!days || !name) {
     throw new BadRequestError('Please provide both name and dates');
   }
-  const dates = days.split(',');
-  const re = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
-  dates.forEach((element) => {
-    if (!re.test(element)) {
-      throw new BadRequestError(
-        // eslint-disable-next-line max-len
-        'The date input must be a sequence of dates express in format dd/mm/aaaa separated by commas');
-    }
-  });
+  const dates = datesValidator(days);
   const event = await Event.create({
     name,
     days: dates,
