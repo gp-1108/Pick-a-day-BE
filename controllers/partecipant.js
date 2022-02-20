@@ -15,6 +15,7 @@ async function addPartecipant(req, res) {
     throw new BadRequestError(
       'Please provide all of the fields needed (ip, name, available, eventId)');
   }
+
   // validation of event
   const event = await Event.findById(eventId);
   if (!event) {
@@ -30,7 +31,7 @@ async function addPartecipant(req, res) {
         'Dates submitted do not match dd/mm/aaaa format');
     } else if (!event.days.includes(element)) {
       throw new ConflictError(
-        'Cannot submit dates not present in main event');
+        `Cannot submit dates not present in main event (${element})`);
     }
   });
 
@@ -66,7 +67,7 @@ async function modifyPartecipant(req, res) {
         'Dates submitted do not match dd/mm/aaaa format');
     } else if (!event.days.includes(element)) {
       throw new ConflictError(
-        'Cannot submit dates not present in main event');
+        `Cannot submit dates not present in main event (${element})`);
     }
   });
 
