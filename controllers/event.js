@@ -15,7 +15,11 @@ async function createEvent(req, res) {
     name,
     days: dates,
   });
-  res.status(StatusCodes.CREATED).json(event);
+  res.status(StatusCodes.CREATED).json({
+    _id: event._id,
+    days: event.days,
+    name: event.name,
+  });
 }
 
 async function getEvent(req, res) {

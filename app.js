@@ -5,6 +5,7 @@ require('express-async-errors');
 const connectDB = require('./db/connectDB.js');
 const eventRouter = require('./routes/event-route.js');
 const partecipantRouter = require('./routes/partecipant-route.js');
+const {deleteOldEvents} = require('./routines');
 
 // extra security packages
 const helmet = require('helmet');
@@ -46,6 +47,7 @@ const port = process.env.PORT || 5000;
 async function start() {
   try {
     await connectDB(process.env.MONGO_URI);
+    setInterval(deleteOldEvents, 2*60*60*1000);
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);
     });
