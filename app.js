@@ -34,6 +34,9 @@ app.use(helmet());
 app.use(cors());
 app.use(xss());
 
+app.get('/', (req, res) => {
+  res.send('Welcome to my API');
+});
 // Routes
 app.use('/api/v1/event', eventRouter);
 app.use('/api/v1/partecipants', partecipantRouter);
