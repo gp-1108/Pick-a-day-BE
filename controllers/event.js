@@ -11,6 +11,14 @@ async function createEvent(req, res) {
     throw new BadRequestError('Please provide both name and dates');
   }
   const dates = days.split(',');
+  const re = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+  dates.forEach((element) => {
+    if (!re.test(element)) {
+      throw new BadRequestError(
+        // eslint-disable-next-line max-len
+        'The date input must be a sequence of dates express in format dd/mm/aaaa separated by commas');
+    }
+  });
   const event = await Event.create({
     name,
     days: dates,
