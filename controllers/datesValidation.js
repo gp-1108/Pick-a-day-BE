@@ -2,7 +2,7 @@
 const {BadRequestError} = require('../errors');
 
 function validator(data) {
-  let dates = data.split(',');
+  let dates = Array.isArray(data) ? data : data.split(',');
   const re = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
   dates.forEach((element) => {
     if (!re.test(element)) {
