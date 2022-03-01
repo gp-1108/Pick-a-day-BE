@@ -2,7 +2,7 @@ const {StatusCodes} = require('http-status-codes');
 const {BadRequestError, NotFoundError} = require('../errors');
 const Event = require('../models/Event.js');
 const Partecipant = require('../models/Partecipant');
-const datesValidator = require('./datesValidation.js');
+const {datesFormatValidator} = require('./datesValidation.js');
 
 async function createEvent(req, res) {
   const {
@@ -11,7 +11,7 @@ async function createEvent(req, res) {
   if (!days || !name) {
     throw new BadRequestError('Please provide both name and dates');
   }
-  const dates = datesValidator(days);
+  const dates = datesFormatValidator(days);
   const event = await Event.create({
     name,
     days: dates,
