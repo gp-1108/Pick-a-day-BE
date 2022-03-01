@@ -6,7 +6,10 @@ const {
 } = require('../errors');
 const Event = require('../models/Event.js');
 const Partecipant = require('../models/Partecipant.js');
-const datesValidator = require('./datesValidation.js');
+const {
+  datesFormatValidator,
+  datesEventValidator,
+} = require('./datesValidation.js');
 
 async function addPartecipant(req, res) {
   const {
@@ -24,7 +27,9 @@ async function addPartecipant(req, res) {
   }
 
   // validation of dates
-  const userDates = datesValidator(available);
+  const userDates = datesFormatValidator(available);
+  datesEventValidator(userDates, event.days);
+
   await Partecipant.create({
     ip: req.ip,
     name,
@@ -48,8 +53,9 @@ async function modifyPartecipant(req, res) {
     throw new BadRequestError(`No event with id ${eventId}`);
   }
 
-  // Validation of dates submitted
-  const userDates = datesValidator(available);
+  // validation of dates
+  const userDates = datesFormatValidator(available);
+  datesEventValidator(userDates, event.days);
 
   // Checking existing data
   const partecipant = await Partecipant.findOne({eventId, name});
