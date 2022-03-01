@@ -10,11 +10,11 @@ const datesValidator = require('./datesValidation.js');
 
 async function addPartecipant(req, res) {
   const {
-    body: {ip, name, available, eventId},
+    body: {name, available, eventId},
   } = req;
-  if (!ip || !name || !available || !eventId) {
+  if (!name || !available || !eventId) {
     throw new BadRequestError(
-      'Please provide all of the fields needed (ip, name, available, eventId)');
+      'Please provide all of the fields needed (name, available, eventId)');
   }
 
   // validation of event
@@ -23,10 +23,10 @@ async function addPartecipant(req, res) {
     throw new BadRequestError(`No event with id ${eventId}`);
   }
 
+  // validation of dates
   const userDates = datesValidator(available);
-
   await Partecipant.create({
-    ip,
+    ip: req.ip,
     name,
     available: userDates,
     eventId,
@@ -36,11 +36,11 @@ async function addPartecipant(req, res) {
 
 async function modifyPartecipant(req, res) {
   const {
-    body: {ip, name, available, eventId},
+    body: {name, available, eventId},
   } = req;
-  if (!ip || !name || !available || !eventId) {
+  if (!name || !available || !eventId) {
     throw new BadRequestError(
-      'Please provide all of the fields needed (ip, name, available, eventId)');
+      'Please provide all of the fields needed (name, available, eventId)');
   }
   // validation of event
   const event = await Event.findById(eventId);
@@ -56,8 +56,7 @@ async function modifyPartecipant(req, res) {
   if (!partecipant) {
     throw new NotFoundError(`No user ${name} partecipated to this event`);
   }
-  console.log(partecipant.compareIP(ip));
-  if (! await partecipant.compareIP(ip)) {
+  if (! await partecipant.compareIP(req.ip)) {
     throw new ConflictError(
       'Cannot modify partecipant dates from different IP');
   }
@@ -69,17 +68,17 @@ async function modifyPartecipant(req, res) {
 
 async function deletePartecipant(req, res) {
   const {
-    body: {ip, name, eventId},
+    body: {name, eventId},
   } = req;
-  if (!ip || !name || !eventId) {
+  if (!name || !eventId) {
     throw new BadRequestError(
-      'Please provide all fields needed (ip, name, eventId)');
+      'Please provide all fields needed (name, eventId)');
   }
   const partecipant = await Partecipant.findOne({eventId, name});
   if (!partecipant) {
     throw new NotFoundError(`No user ${name} partecipated to this event`);
   }
-  if (! await partecipant.compareIP(ip)) {
+  if (! await partecipant.compareIP(req.ip)) {
     throw new ConflictError(
       'Cannot delete partecipant dates from different IP');
   }

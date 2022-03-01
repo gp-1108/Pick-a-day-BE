@@ -20,7 +20,7 @@ const notFound = require('./middleware/not-found.js');
 const express = require('express');
 const app = express();
 
-app.set('trust proxy', 1);
+app.set('trust proxy', true);
 app.use(
   rateLimiter({
     windowMs: 15 * 60 * 1000, // 15 minutes
