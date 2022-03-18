@@ -44,7 +44,7 @@ app.use('/api/v1/event', eventRouter);
 app.use('/api/v1/partecipants', partecipantRouter);
 
 // Error Handler
-// app.use(errorHandler);
+app.use(errorHandler);
 // app.use(notFound);
 
 app.get('*', (req, res) => {
