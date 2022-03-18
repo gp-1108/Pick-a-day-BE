@@ -19,6 +19,7 @@ const notFound = require('./middleware/not-found.js');
 
 const express = require('express');
 const app = express();
+const path = require('path');
 
 app.set('trust proxy', true);
 app.use(
@@ -34,9 +35,11 @@ app.use(helmet());
 app.use(cors());
 app.use(xss());
 
-app.get('/', (req, res) => {
-  res.send('Welcome to my API');
-});
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// app.get('/', (req, res) => {
+//   res.send('Welcome to my API');
+// });
 // Routes
 app.use('/api/v1/event', eventRouter);
 app.use('/api/v1/partecipants', partecipantRouter);
