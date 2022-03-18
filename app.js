@@ -46,7 +46,6 @@ app.use('/api/v1/partecipants', partecipantRouter);
 
 // Error Handler
 app.use(errorHandler);
-app.use(notFound);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
