@@ -24,7 +24,7 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd pick-a-day && npm install && npm run build"
   },
   "repository": {
     "type": "git",

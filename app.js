@@ -35,8 +35,7 @@ app.use(helmet());
 app.use(cors());
 app.use(xss());
 
-
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, '/pick-a-day/build')));
 // app.get('/', (req, res) => {
 //   res.send('Welcome to my API');
 // });
@@ -45,10 +44,11 @@ app.use('/api/v1/event', eventRouter);
 app.use('/api/v1/partecipants', partecipantRouter);
 
 // Error Handler
-app.use(errorHandler);
+// app.use(errorHandler);
+// app.use(notFound);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  res.sendFile(path.join(__dirname, '/pick-a-day/build/index.html'));
 });
 
 const port = process.env.PORT || 5000;
