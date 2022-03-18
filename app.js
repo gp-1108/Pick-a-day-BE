@@ -46,7 +46,7 @@ app.use('/api/v1/partecipants', partecipantRouter);
 
 // Error Handler
 app.use(errorHandler);
-app.use(notFound);
+// app.use(notFound);
 
 const port = process.env.PORT || 5000;
 
