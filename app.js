@@ -35,7 +35,7 @@ app.use(cors());
 app.use(xss());
 
 app.get('/', (req, res) => {
-  res.send('Welcome to my API');
+  res.send('Documentation arriving soon...');
 });
 
 // Routes
