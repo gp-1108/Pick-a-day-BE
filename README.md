@@ -68,7 +68,7 @@ We are now ready to run the actual app:
 
 <h2 id="documentation" align="center"> Documentation </h2>
 
-As of right now, there is no official documentation for this API. Once developed it will be available [here][back-url].
+The documenation of this API is available [here][back-url].
 
 ---
 
