@@ -18,6 +18,7 @@ const errorHandler = require('./middleware/errorHandler.js');
 const notFound = require('./middleware/not-found.js');
 
 const express = require('express');
+const path = require('path');
 const app = express();
 
 app.set('trust proxy', true);
@@ -34,9 +35,6 @@ app.use(helmet());
 app.use(cors());
 app.use(xss());
 
-app.get('/', (req, res) => {
-  res.send('Documentation arriving soon...');
-});
 
 // Routes
 app.use('/api/v1/event', eventRouter);
@@ -44,7 +42,11 @@ app.use('/api/v1/partecipants', partecipantRouter);
 
 // Error Handler
 app.use(errorHandler);
+
+app.use('/', express.static(path.join(__dirname, 'docs')));
+
 app.use(notFound);
+
 
 const port = process.env.PORT || 5000;
 
