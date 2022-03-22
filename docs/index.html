@@ -1,0 +1,726 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta
+            name="description"
+            content="Documentation for the pickaday API"
+        >
+    <title>Pick a Day Backend</title>
+
+    <style media="screen">
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sa {
+  color: #6c71c4;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="stylesheets/screen-c9d8fa83.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-b12a2749.js"></script>
+
+    <script>
+      $(function() { setupCodeCopy(); });
+    </script>
+  </head>
+
+  <body class="index" data-languages="[&quot;javascript&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo-73efdee6.png" class="logo" alt="" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="javascript">javascript</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#event" class="toc-h1 toc-link" data-title="Event">Event</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#creating-an-event" class="toc-h2 toc-link" data-title="Creating an Event">Creating an Event</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-specific-event" class="toc-h2 toc-link" data-title="Get a specific event">Get a specific event</a>
+                  </li>
+                  <li>
+                    <a href="#delete-an-event" class="toc-h2 toc-link" data-title="Delete an Event">Delete an Event</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#partecipant" class="toc-h1 toc-link" data-title="Partecipant">Partecipant</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#adding-a-partecipant" class="toc-h2 toc-link" data-title="Adding a Partecipant">Adding a Partecipant</a>
+                  </li>
+                  <li>
+                    <a href="#editing-a-partecipant" class="toc-h2 toc-link" data-title="Editing a partecipant">Editing a partecipant</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-partecipant" class="toc-h2 toc-link" data-title="Delete a Partecipant">Delete a Partecipant</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#response-payload" class="toc-h2 toc-link" data-title="Response Payload">Response Payload</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>Pick a day is a simple app event based. The main goal of the API is to store plausible dates for an event, allowing partecipants to choose whether they are available or not in a day of the main event. It is therefore possiple to see who can join when in a selected event.</p>
+
+<p>There are two main type of objects in pickaday:
+* Events
+* Partecipants</p>
+
+<p>An <strong>Event</strong> is defined by:</p>
+
+<ul>
+<li>a unique ID</li>
+<li>the days in which it could take place</li>
+<li>the name of the event</li>
+</ul>
+
+<p>A <strong>Partecipant</strong> is defined by:</p>
+
+<ul>
+<li>Its name</li>
+<li>the event it partecipate to</li>
+</ul>
+
+<aside class="notice">
+Multiple events with the same name and dates can be created without problems.
+</aside>
+<h1 id='authentication'>Authentication</h1>
+<p>This API does not require any previous authorization. Its endpoint can be accessed freely.</p>
+<h1 id='event'>Event</h1>
+<p>An Event must follows some rules in order to exists:</p>
+
+<ul>
+<li>No event is allowed to contains more than 14 distinct dates</li>
+<li>It must contain at least one day</li>
+<li>Its name length must be inside the range [3, 25] characters.</li>
+</ul>
+<h2 id='creating-an-event'>Creating an Event</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">newEvent</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://pick-a-day.herokuapp.com/api/v1/event</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">days</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">01/02/2014</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">02/02/2014</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">05/02/2014</span><span class="dl">"</span><span class="p">],</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">My Event Name</span><span class="dl">"</span>
+<span class="p">});</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this in both scenarios:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6215257d486c758bc7180462"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Event Name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"days"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1/2/2014"</span><span class="p">,</span><span class="s2">"2/2/2014"</span><span class="p">,</span><span class="s2">"5/2/2014"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint allows to create an Event starting from its name and the data with it associated.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://pick-a-day.herokuapp.com/api/v1/event</code></p>
+<h3 id='query-payload'>Query Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Constraints</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>days</td>
+<td>It must be either an array of Strings in format <code>gg/mm/aaaa</code> or a single String composed by <code>gg/mm/aaaa</code> entries separated by commas</td>
+<td>At least one day and no more than 14</td>
+</tr>
+<tr>
+<td>name</td>
+<td>A String containing the name of the event</td>
+<td>The length of the string cannot exceed 25 characters and be less than 3 characters</td>
+</tr>
+</tbody></table>
+<h3 id='response-payload'>Response Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>_id</td>
+<td>A String of the event&#39;s ID</td>
+</tr>
+<tr>
+<td>days</td>
+<td>An arry of Strings in format <code>gg/mm/aaaa</code> containing all the dates of this event</td>
+</tr>
+<tr>
+<td>name</td>
+<td>A String containing the name of the event</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+The <code>_id</code> returned by the endpoint is very important, it will allow to search for a specific event.
+</aside>
+<h2 id='get-a-specific-event'>Get a specific event</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">event</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://pick-a-day.herokuapp.com/api/v1/event/6215257d486c758bc7180462</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Event Name"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"days"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1/2/2014"</span><span class="p">,</span><span class="s2">"2/2/2014"</span><span class="p">,</span><span class="s2">"5/2/2014"</span><span class="p">],</span><span class="w">
+  </span><span class="nl">"partecipants"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"john"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"2/2/2014"</span><span class="p">,</span><span class="s2">"5/2/2014"</span><span class="p">],</span><span class="w">
+    </span><span class="nl">"patrick"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"2/2/2014"</span><span class="p">],</span><span class="w">
+    </span><span class="nl">"peter"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1/2/2014"</span><span class="p">,</span><span class="s2">"5/2/2014"</span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves a specific event whose ID matches the one provided.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://pick-a-day.herokuapp.com/api/v1/event/:id</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The ID of the event to retrieve</td>
+</tr>
+</tbody></table>
+<h3 id='response-payload-2'>Response Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>days</td>
+<td>An arry of Strings in format <code>gg/mm/aaaa</code> containing all the dates of this event</td>
+</tr>
+<tr>
+<td>name</td>
+<td>A String containing the name of the event</td>
+</tr>
+<tr>
+<td>partecipant</td>
+<td>a map containing all of the entries <code>partecipant-availability</code></td>
+</tr>
+</tbody></table>
+<h2 id='delete-an-event'>Delete an Event</h2>
+<p>There is no need to delete an Event. Once the most recent available date will be passed by more than 10 days it will be automatically deleted.</p>
+
+<aside class="warning">
+  When an Event is deleted, all of the associated partecipants are deleted too
+</aside>
+<h1 id='partecipant'>Partecipant</h1>
+<p>A Partecipant in order to exist must meet some requirements:</p>
+
+<ul>
+<li>A Partecipant must always be associated to an already existing event</li>
+<li>Given a specific name, at most one Partecipant per event is allowed to use that name</li>
+<li>A Partecipant name length must fall in this range: [3, 15]</li>
+<li>Once created, the partecipant&#39;s name cannot be changed</li>
+<li>A Partecipant must be available at least in onde day, if not it will be deleted from the event</li>
+<li>All of the available dates of the Partecipant must be valid dates (contained in the corresponding event)</li>
+<li>Given a specific device, this device can add/edit only one partecipant per event</li>
+</ul>
+
+<aside class="notice">
+Once a Partecipant is created, it will be linked to the device'IP which created the Partecipant in the first place.
+From now on, only this specific device will be allowed to modify this partecipant (edit or delete).
+</aside>
+<h2 id='adding-a-partecipant'>Adding a Partecipant</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">partecipant</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://pick-a-day.herokuapp.com/api/v1/partecipants</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">available</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">02/02/2014</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">05/02/2014</span><span class="dl">"</span><span class="p">],</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">eventId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">6215257d486c758bc7180462</span><span class="dl">"</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">partecipant</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://pick-a-day.herokuapp.com/api/v1/partecipants</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">available</span><span class="p">:</span> <span class="dl">"</span><span class="s2">02/02/2014,05/02/2014</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">eventId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">6215257d486c758bc7180462</span><span class="dl">"</span>
+<span class="p">});</span>
+</code></pre></div>
+<blockquote>
+<p>The above commands returns an empty object in JSON:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint allows to create an Partecipant in a specific event.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST https://pick-a-day.herokuapp.com/api/v1/partecipants</code></p>
+<h3 id='query-payload'>Query Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Constraints</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>available</td>
+<td>It must be either an array of Strings in format <code>gg/mm/aaaa</code> or a single String composed by <code>gg/mm/aaaa</code> entries separated by commas</td>
+<td>At least one day and no more than 14, also it must be present in the corresponding event dates</td>
+</tr>
+<tr>
+<td>name</td>
+<td>A String containing the name of the partecipant</td>
+<td>The length of the string cannot exceed 15 characters and be less than 3 characters. Given a specific event, no partecipants can share the same name</td>
+</tr>
+<tr>
+<td>eventId</td>
+<td>A String with the ID of the event</td>
+<td>It must be a valid ID of an already existing event</td>
+</tr>
+</tbody></table>
+<h2 id='editing-a-partecipant'>Editing a partecipant</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">partecipant</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">patch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://pick-a-day.herokuapp.com/api/v1/partecipants</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">available</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">05/02/2014</span><span class="dl">"</span><span class="p">],</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Peter</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">eventId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">6215257d486c758bc7180462</span><span class="dl">"</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">partecipant</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">patch</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://pick-a-day.herokuapp.com/api/v1/partecipants</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">available</span><span class="p">:</span> <span class="dl">"</span><span class="s2">05/02/2014</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Peter</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">eventId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">6215257d486c758bc7180462</span><span class="dl">"</span>
+<span class="p">});</span>
+</code></pre></div>
+<blockquote>
+<p>The above commands returns an empty object in JSON:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint allows to edit a partecipant available dates.</p>
+
+<p>Please keep in mind that only a <strong>matching IP address</strong> allows for editing of a specified partecipant. If one tries to edit a partecipant from another device/IP it will not be allowed.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>PATCH https://pick-a-day.herokuapp.com/api/v1/partecipants</code></p>
+<h3 id='query-payload-2'>Query Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Constraints</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>available</td>
+<td>It must be either an array of Strings in format <code>gg/mm/aaaa</code> or a single String composed by <code>gg/mm/aaaa</code> entries separated by commas</td>
+<td>At least one day and no more than 14, also it must be present in the corresponding event dates</td>
+</tr>
+<tr>
+<td>name</td>
+<td>A String containing the name of the partecipant</td>
+<td>It must be an already existing partecipant&#39;s name in the event</td>
+</tr>
+<tr>
+<td>eventId</td>
+<td>A String with the ID of the event</td>
+<td>It must be a valid ID of an already existing event</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">
+The combination of Event-Partecipant's name identifies the partecipants. It is therefore not allowed to modify the name of the partecipant after its creation.
+The name in the payload serves for identifying purpose, not editing.
+</aside>
+<h2 id='delete-a-partecipant'>Delete a Partecipant</h2><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">partecipant</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://pick-a-day.herokuapp.com/api/v1/partecipants</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">eventId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">6215257d486c758bc7180462</span><span class="dl">"</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">partecipant</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://pick-a-day.herokuapp.com/api/v1/partecipants</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">eventId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">6215257d486c758bc7180462</span><span class="dl">"</span>
+<span class="p">});</span>
+</code></pre></div>
+<blockquote>
+<p>The above commands returns an empty object in JSON:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint allows to delete a partecipant from a specific event.</p>
+
+<p>Please keep in mind that only a <strong>matching IP address</strong> allows for deletion of a specified partecipant. If one tries to delete a partecipant from another device/IP it will not be allowed.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>DELETE https://pick-a-day.herokuapp.com/api/v1/partecipants</code></p>
+<h3 id='query-payload-3'>Query Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Constraints</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>A String containing the name of the partecipant</td>
+<td>It must be an already existing partecipant&#39;s name in the event</td>
+</tr>
+<tr>
+<td>eventId</td>
+<td>A String with the ID of the event</td>
+<td>It must be a valid ID of an already existing event</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<p>The pickday API uses most of the standard error codes. 
+If any of your requests leads to an error it will be reported as such with its HTTP status code.</p>
+
+<p>When a response singals an error, it will always come with a JSON response like: <code>{ msg: &quot;Meaningful explanation of what has gone wrong }</code></p>
+
+<p>Please, always look for the <code>.msg</code> property in the response, as it will be a meaningful explanation of what has gone wrong in your request.</p>
+<div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">newEvent</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://pick-a-day.herokuapp.com/api/v1/event</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">days</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">01/02/2014</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">02/02/2014</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">05/02/2014</span><span class="dl">"</span><span class="p">],</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">sa</span><span class="dl">"</span> <span class="c1">// The even name is too short!</span>
+<span class="p">});</span>
+</code></pre></div>
+<blockquote>
+<p>The response would be 400 Bad requests and the following JSON payload:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Path `name` (`sa`) is shorter than the minimum allowed length (3)."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">const</span> <span class="nx">axios</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">axios</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">partecipant</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">axios</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://pick-a-day.herokuapp.com/api/v1/partecipants</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Charlie</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">eventId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">6215257d486c758bc7180462</span><span class="dl">"</span>
+<span class="p">});</span>
+</code></pre></div>
+<blockquote>
+<p>Assuming the device from which the deletion was attempted and the one which created the partecipant where different
+The response would be 409 Conflict with the following JSON payload:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cannot delete partecipant dates from different IP"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='response-payload'>Response Payload</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>msg</td>
+<td>A String containing an explanation of why the request failed</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="javascript">javascript</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
